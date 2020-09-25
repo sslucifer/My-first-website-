@@ -1,0 +1,132 @@
+//After running the programe type Sumit Sagar Lakra & see the result
+//Data in this programe can be modified with proper KNOWLEDGE
+//Click of mouse is not programmed
+#include<iostream.h>
+#include<conio.h>
+#include<graphics.h>
+#include<dos.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<string.h>
+union REGS i,o;
+
+void InitMouse();
+void ShowMouse();
+void HideMouse();
+int GetX();
+int GetY();
+int GetB();
+
+void InitMouse()
+{
+
+	i.x.ax=0;
+	int86(0x33,&i,&o);
+}
+void ShowMouse()
+{
+
+	i.x.ax=1;
+	int86(0x33,&i,&o);
+}
+void HideMouse()
+{
+	i.x.ax=2;
+	int86(0x33,&i,&o);
+}
+int GetB()
+{
+	i.x.ax=3;
+	int86(0x33,&i,&o);
+	return o.x.bx;
+}
+int GetX()
+{
+	i.x.ax=3;
+	int86(0x33,&i,&o);
+	return o.x.cx;
+}
+int GetY()
+{
+	i.x.ax=3;
+	int86(0x33,&i,&o);
+	return o.x.dx;
+}
+
+void main()
+{
+   clrscr();
+   int gdriver=DETECT,gmode,errorcode;
+   initgraph(&gdriver,&gmode,"D:\\TC\\BGI");
+   errorcode=graphresult();
+   if(errorcode!=grOk)
+   {
+     cout<<"\n Graphics Error";
+     getch();
+     exit(0);
+   }
+
+   InitMouse();
+   ShowMouse();
+   setbkcolor(1);
+   setcolor(4);
+   rectangle(0,0,getmaxx(),getmaxy());
+   setcolor(9);
+   settextstyle(TRIPLEX_FONT,HORIZ_DIR,8);
+   outtextxy(175,120,"G");
+   setcolor(2);
+   outtextxy(225,120,"O");
+   setcolor(3);
+   outtextxy(275,120,"O");
+   setcolor(7);
+   outtextxy(325,120,"G");
+   setcolor(6);
+   outtextxy(375,120,"L");
+   setcolor(13);
+   outtextxy(425,120,"E");
+   setcolor(3);
+   setcolor(6);
+   settextstyle(SMALL_FONT,HORIZ_DIR,6);
+   outtextxy(400,200,"India");
+   setcolor(2);
+
+   rectangle(150,235,500,260);
+   rectangle(120,275,275,310);
+   rectangle(350,275,535,310);
+   setcolor(10);
+   rectangle(553,11,617,35);
+   setcolor(8);
+   settextstyle(SANS_SERIF_FONT,HORIZ_DIR,1);
+   outtextxy(125,280," Google Search            I'm  Feeling Lucky");
+   setcolor(5);
+   settextstyle(SANS_SERIF_FONT,HORIZ_DIR,1);
+   outtextxy(380,10,"+You Images Gmail Sign In");
+   setcolor(9);
+   outtextxy(10,450,"Advertisement Policy Help");
+   outtextxy(500,450,"Privacy Setting");
+   char a[50];
+   cprintf("\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t");
+   gets(a);
+   setcolor(2);
+   outtextxy(100,250,"_");
+   char *str1="Sumit Sagar Lakra",*str2="Maiya";
+   if(stricmp(a,str1)==0)
+   {
+      cleardevice();
+      setbkcolor(1);
+      outtextxy(250,150,"Sumit is a Programmer.");
+   }
+   else if(stricmp(a,str2)==0)
+   {
+      cleardevice();
+      setbkcolor(6);
+      outtextxy(250,150," very cute girl.very intelligent girl.");
+   }
+   else
+   {
+      cleardevice();
+      setbkcolor(1);
+      outtextxy(250,150,"Data not Found.");
+   }
+   getch();
+}
